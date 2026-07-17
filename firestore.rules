@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper to check if a user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper to check if the document belongs to the active user
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Secure rule for user profiles
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isOwner(userId);
+      allow delete: if false; // Disallow deletion for compliance and persistence
+    }
+
+    // Access control rules for match schedule telemetry
+    match /matches/{matchId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ORGANIZER' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'OPERATIONS'
+      );
+    }
+
+    // Access control rules for concessions / food courts queue data
+    match /concessions/{concessionId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && (
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'STAFF' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ORGANIZER'
+      );
+    }
+
+    // Access control rules for operational incident reports
+    match /incidents/{incidentId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update: if isAuthenticated() && (
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'OPERATIONS' ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ORGANIZER'
+      );
+      allow delete: if false;
+    }
+  }
+}
