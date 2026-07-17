@@ -4,6 +4,7 @@
  */
 
 export const FIREBASE_CONFIG = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'AIzaSyDPRJPFUwqiNB9P5WZYjBMRjb_4aApDt7s',
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 'regal-center-494708-a3.firebaseapp.com',
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'regal-center-494708-a3',
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || 'regal-center-494708-a3.firebasestorage.app',

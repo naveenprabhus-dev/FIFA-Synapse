@@ -13,6 +13,35 @@ export interface SynapseRecommendation<T = unknown> {
 
 export type DecisionType = 'CONCESSION_ROUTING' | 'STADIUM_EGRESS' | 'STAFF_REPLENISHMENT' | 'INCIDENT_DISPATCH';
 
+export type SynapseIntent =
+  | 'NAVIGATION'
+  | 'FOOD_RECOMMENDATION'
+  | 'EMERGENCY'
+  | 'CROWD'
+  | 'ACCESSIBILITY'
+  | 'PARKING'
+  | 'MATCH_INFORMATION'
+  | 'GENERAL_ASSISTANCE';
+
+export type SynapsePriority = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+
+export interface SynapseCoreRecommendation {
+  id: string;
+  title: string;
+  recommendation: string;
+  reason: string;
+  confidenceScore: number;
+  priority: SynapsePriority;
+  suggestedAction: string;
+  estimatedBenefit: string;
+  timestamp: string;
+  intent: SynapseIntent;
+  contextSnapshot?: Record<string, unknown>;
+  alternative?: string;
+  rawResponse?: string;
+  reasoningDetails?: string[];
+}
+
 export interface SynapseContext {
   userId: string;
   userRole: string;
