@@ -75,7 +75,8 @@ export class ResponseParser {
         intent,
         alternative,
         rawResponse: rawText,
-        contextSnapshot: reasoningDetails ? { reasoningDetails } : undefined,
+        contextSnapshot: parsed,
+        reasoningDetails,
       };
 
     } catch (error) {

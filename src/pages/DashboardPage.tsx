@@ -18,6 +18,9 @@ import {
   ParkingStatusWidget, WeatherWidget, AccessibilityStatusWidget, 
   EmergencyAlertsWidget, AiRecommendationsWidget 
 } from '../components/dashboard/PlaceholderWidgets';
+import { SmartNavigationAgent } from '../features/fan/SmartNavigationAgent';
+import { CrowdIntelligenceAgent } from '../features/crowd/CrowdIntelligenceAgent';
+import { FoodServicesAgent } from '../features/fan/FoodServicesAgent';
 import { 
   Activity, Award, Compass, Heart, Layers, MapPin, 
   MessageSquare, Shield, ShieldAlert, ShoppingBag, Terminal, Users 
@@ -254,6 +257,18 @@ export function DashboardPage() {
               />
             </div>
           </div>
+        </div>
+      ) : activeTab === 'navigation' ? (
+        <div className="space-y-6 animate-fade-in">
+          <SmartNavigationAgent />
+        </div>
+      ) : activeTab === 'crowd-management' || activeTab === 'crowd-monitoring' ? (
+        <div className="space-y-6 animate-fade-in">
+          <CrowdIntelligenceAgent />
+        </div>
+      ) : activeTab === 'food-services' || activeTab === 'inventory' ? (
+        <div className="space-y-6 animate-fade-in">
+          <FoodServicesAgent />
         </div>
       ) : (
         /* Tab Specific Views showing corresponding reusable mock cards */

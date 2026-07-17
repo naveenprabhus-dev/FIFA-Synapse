@@ -63,6 +63,7 @@ import { ResponseParser } from '../ai/orchestrator/ResponseParser';
 import { SynapseCore } from '../ai/orchestrator/SynapseCore';
 import { CrowdAgent } from '../ai/agents/CrowdAgent';
 import { RouteAgent } from '../ai/agents/RouteAgent';
+import { FoodAgent } from '../ai/agents/FoodAgent';
 import { GeminiClient } from '../ai/orchestrator/GeminiClient';
 import { GeminiProvider } from '../ai/orchestrator/GeminiProvider';
 
@@ -96,4 +97,5 @@ export const synapseCore = new SynapseCore(
 
 export const crowdAgent = new CrowdAgent(synapseCore);
 export const routeAgent = new RouteAgent(synapseCore);
+export const foodAgent = new FoodAgent(synapseCore);
 

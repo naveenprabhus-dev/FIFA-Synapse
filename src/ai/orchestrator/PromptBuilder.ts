@@ -58,32 +58,57 @@ export class PromptBuilder {
   }
 
   private buildConcessionPrompt(context: SynapseFullContext, options?: Record<string, unknown>): CompiledPrompt {
-    const sysInstruction = `You are the Concession Intelligent Replenishment and Queue Optimizer for FIFA Synapse. Your job is to suggest the smartest food & beverage options for fans to minimize queues, and suggest stock relocations for staff to maximize inventory efficiency.
-Always return valid JSON.`;
+    const sysInstruction = `You are the Concession Intelligent Replenishment and Queue Optimizer for FIFA Synapse. Your job is to suggest the smartest food & beverage options for fans to minimize queues and maximize convenience, and suggest stock relocations for staff to maximize inventory efficiency.
+Always return valid JSON. Do not include any markdown backticks or formatting outside the JSON object.`;
 
     const foodCourtsStr = context.foodCourts
-      ? context.foodCourts.map(f => `- ${f.name} in ${f.locationDescription}: status ${f.status}, queue size ${f.queue.currentLength}, wait minutes ${f.queue.estimatedWaitMinutes} min`).join('\n')
+      ? context.foodCourts.map(f => {
+          const menuStr = f.menu.map(m => `${m.name} ($${m.price}) [Available: ${m.isAvailable}, Halal: ${m.isHalal}, Vegetarian: ${m.isVegetarian}, Stock: ${m.stockLevel}]`).join(', ');
+          return `- ${f.name} in ${f.locationDescription} (ID: ${f.id}): status ${f.status}, queue size ${f.queue.currentLength}, wait minutes ${f.queue.estimatedWaitMinutes} min, popularity rating ${f.popularityScore}/5.0, accessibility: ${f.accessibilityFriendly ? 'Fully Accessible (Wheelchair Friendly)' : 'No Dedicated Accessibility Access'}. Menu: ${menuStr}`;
+        }).join('\n')
       : 'No concessions info.';
 
     const userPrompt = `Intent: Concession Selection & Stock Optimization
-Query options: ${JSON.stringify(options ?? {})}
+User Details:
+- Active Role: ${context.activeRole}
+- Current Location/Sector: ${context.userLocation?.sectorId || 'Unknown Sector'}
+- Dietary Preferences: ${options?.halalOnly ? 'Halal Only' : 'None'}, ${options?.vegetarianOnly ? 'Vegetarian Only' : 'None'}
+- Accessibility Required: ${options?.accessibilityRequired ? 'Yes (Wheelchair friendly facilities essential)' : 'No'}
+- Search Query / Food Type: "${options?.searchQuery || 'Any food'}"
+- Category Filter: "${options?.categoryFilter || 'All categories'}"
 
-Concessions Telemetry:
+Stadium Context:
+- Active Match Phase: ${context.activeMatch?.currentPhase ?? 'UNKNOWN'} (Minute: ${context.activeMatch?.currentMinute ?? 0})
+- Crowd Density / Active Bottlenecks: ${context.crowdAnalysis ? context.crowdAnalysis.map(c => `Sector ${c.sectorId}: ${c.occupancyPercent}% occupancy, ${c.flowRatePerMin} people/min, Status: ${c.status}`).join('; ') : 'Normal'}
+- Weather Status: Temp ${context.weather?.temperatureCelsius ?? 28}°C, Condition: ${context.weather?.forecastBrief ?? 'Clear'}
+
+Available Concessions Telemetry:
 ${foodCourtsStr}
 
-Active Match Phase: ${context.activeMatch?.currentPhase ?? 'UNKNOWN'} (Minute: ${context.activeMatch?.currentMinute ?? 0})
+Analyze the user's requirements, match state, crowd flow rates, and walking distances.
+Determine the SMARTEST food option instead of just the nearest one. Recommend walking to a slightly further kiosk if the queue is significantly shorter (calculate overall time spent = walking time + waiting time).
+Suggest a break timing if we are near halftime (minute 40-45) or predict high crowd waves.
 
-Formulate a smart concession/replenishment recommendation matching this schema:
+Formulate a smart concession/replenishment recommendation matching this JSON schema exactly:
 {
   "title": "Concession Recommendation Title",
-  "recommendation": "Main decision instruction",
-  "reason": "Queue and stock justifications",
+  "recommendation": "Main decision instruction (e.g. Walk to Food Court C)",
+  "reason": "Direct explanation of why this is the smartest decision, comparing overall times",
   "confidenceScore": 0.0 to 1.0,
   "priority": "LOW" | "MEDIUM" | "HIGH" | "CRITICAL",
-  "suggestedAction": "First direct action",
-  "estimatedBenefit": "Wait reduction or replenishment recovery stats",
-  "alternative": "Contingency option",
-  "reasoningDetails": ["Reason 1", "Reason 2"]
+  "suggestedAction": "First direct action step",
+  "estimatedBenefit": "Overall benefit statement (e.g. Saves 18 minutes of waiting)",
+  "alternative": "Contingency option (e.g. Food Court B as backup)",
+  "estimatedWalkingTimeMinutes": 2,
+  "estimatedWaitingTimeMinutes": 3,
+  "estimatedTimeSavedMinutes": 15,
+  "accessibilityNotes": "Accessibility routing or wheelchair ramp notes",
+  "alternativeFoodCourts": ["Kiosk X in Sector Y", "Kiosk Z in Sector W"],
+  "reasoningDetails": [
+    "Step 1: Check nearest option queue (e.g., 24 mins wait)",
+    "Step 2: Check alternative option queue (e.g., 3 mins wait + 3 extra mins walk)",
+    "Step 3: Conclude that alternative option saves 18 minutes overall"
+  ]
 }
 `;
     return { systemInstruction: sysInstruction, userPrompt };
