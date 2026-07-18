@@ -12,3 +12,5 @@ export * from './AccessibilityService';
 export * from './OperationsService';
 export * from './VenueService';
 export * from './RecommendationService';
+export * from './EmergencyService';
+export * from './AccessibilityService';

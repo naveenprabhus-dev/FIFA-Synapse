@@ -10,7 +10,7 @@ import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { 
   Home, Compass, Map, AlertTriangle, Radio, BarChart3, ClipboardList, Package, 
-  Zap, ShoppingBag, Bell, User, Settings, ShieldAlert, Heart, Activity, Flame, Users
+  Zap, ShoppingBag, Bell, User, Settings, ShieldAlert, Heart, Activity, Flame, Users, Accessibility
 } from 'lucide-react';
 
 interface RoleLayoutProps {
@@ -27,6 +27,7 @@ export function RoleLayout({ children }: RoleLayoutProps) {
         return [
           { id: 'home', name: 'Home', icon: Home },
           { id: 'navigation', name: 'Navigation', icon: Compass },
+          { id: 'accessibility', name: 'Accessibility', icon: Accessibility },
           { id: 'matches', name: 'Matches', icon: Flame },
           { id: 'food-services', name: 'Food & Services', icon: ShoppingBag },
           { id: 'notifications', name: 'Notifications', icon: Bell },
@@ -38,6 +39,7 @@ export function RoleLayout({ children }: RoleLayoutProps) {
           { id: 'home', name: 'Home', icon: Home },
           { id: 'operations-overview', name: 'Operations Overview', icon: Activity },
           { id: 'crowd-management', name: 'Crowd Management', icon: Users },
+          { id: 'accessibility', name: 'Accessibility', icon: Accessibility },
           { id: 'incident-center', name: 'Incident Center', icon: ShieldAlert },
           { id: 'analytics', name: 'Analytics', icon: BarChart3 },
           { id: 'notifications', name: 'Notifications', icon: Bell },
@@ -48,6 +50,7 @@ export function RoleLayout({ children }: RoleLayoutProps) {
           { id: 'home', name: 'Home', icon: Home },
           { id: 'active-incidents', name: 'Active Incidents', icon: ShieldAlert },
           { id: 'assigned-tasks', name: 'Assigned Tasks', icon: ClipboardList },
+          { id: 'accessibility', name: 'Accessibility', icon: Accessibility },
           { id: 'crowd-monitoring', name: 'Crowd Monitoring', icon: Users },
           { id: 'emergency-center', name: 'Emergency Center', icon: AlertTriangle },
           { id: 'notifications', name: 'Notifications', icon: Bell },

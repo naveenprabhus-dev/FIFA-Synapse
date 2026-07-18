@@ -27,6 +27,7 @@ import {
   OperationsService,
   VenueService,
   RecommendationService,
+  EmergencyService,
 } from './index';
 
 // Instantiate mock repositories as default implementations
@@ -52,6 +53,7 @@ export const accessibilityService = new AccessibilityService(venueRepository, na
 export const operationsService = new OperationsService(incidentRepository);
 export const venueService = new VenueService(venueRepository, foodCourtRepository, parkingRepository);
 export const recommendationService = new RecommendationService(recommendationRepository);
+export const emergencyService = new EmergencyService();
 
 // AI Orchestration Imports
 import { IntentEngine } from '../ai/orchestrator/IntentEngine';
@@ -65,6 +67,7 @@ import { CrowdAgent } from '../ai/agents/CrowdAgent';
 import { RouteAgent } from '../ai/agents/RouteAgent';
 import { FoodAgent } from '../ai/agents/FoodAgent';
 import { EmergencyAgent } from '../ai/agents/EmergencyAgent';
+import { AccessibilityAgent } from '../ai/agents/AccessibilityAgent';
 import { GeminiClient } from '../ai/orchestrator/GeminiClient';
 import { GeminiProvider } from '../ai/orchestrator/GeminiProvider';
 
@@ -100,4 +103,5 @@ export const crowdAgent = new CrowdAgent(synapseCore);
 export const routeAgent = new RouteAgent(synapseCore);
 export const foodAgent = new FoodAgent(synapseCore);
 export const emergencyAgent = new EmergencyAgent(synapseCore);
+export const accessibilityAgent = new AccessibilityAgent(synapseCore);
 

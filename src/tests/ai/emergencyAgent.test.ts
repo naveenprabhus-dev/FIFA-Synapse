@@ -259,4 +259,70 @@ describe('AI Emergency Response Agent Test Suite', () => {
     assert.ok(rec.title.includes('Recovery'));
     assert.ok(rec.recommendation);
   });
+
+  // Test 9: Lost Child Emergency Scenario
+  it('should formulate tactical guidelines for Lost Child / Missing Person incidents', async () => {
+    const aiProvider = new MockAIProvider(10, false, false);
+    const core = new SynapseCore(intentEngine, contextBuilder, decisionEngine, promptBuilder, aiProvider, responseParser);
+    const agent = new EmergencyAgent(core);
+
+    const options: EmergencyContextOptions = {
+      emergencyType: 'LOST_CHILD',
+      locationSector: 'SEC_108',
+      nearestMedicalRoom: 'Sector 108 Emergency Cabin',
+    };
+
+    const rec = await agent.getEmergencyDirectives('user-fan-1', UserRole.FAN, { latitude: 25.3522, longitude: 51.5311, sectorId: 'SEC_108' }, options);
+    assert.strictEqual(rec.intent, 'EMERGENCY');
+    assert.ok(rec.recommendation);
+    assert.ok(rec.recommendation.toLowerCase().includes('authority') || rec.recommendation.toLowerCase().includes('steward') || rec.recommendation.toLowerCase().includes('safe'));
+  });
+
+  // Test 10: Power Failure Emergency Scenario
+  it('should formulate safe auxiliary procedures for power failures', async () => {
+    const aiProvider = new MockAIProvider(10, false, false);
+    const core = new SynapseCore(intentEngine, contextBuilder, decisionEngine, promptBuilder, aiProvider, responseParser);
+    const agent = new EmergencyAgent(core);
+
+    const options: EmergencyContextOptions = {
+      emergencyType: 'POWER_FAILURE',
+      locationSector: 'SEC_104',
+      elevatorStatus: 'OFFLINE',
+    };
+
+    const rec = await agent.getEmergencyDirectives('user-fan-1', UserRole.FAN, { latitude: 25.3522, longitude: 51.5311, sectorId: 'SEC_104' }, options);
+    assert.strictEqual(rec.priority, 'CRITICAL');
+    assert.ok(rec.recommendation);
+  });
+
+  // Test 11: Repository Layer Telemetry Extraction
+  it('should verify mock repositories provide proper data schemas for emergency contexts', async () => {
+    const mockUser = await mockUserRepo.getUserProfile('uid-123');
+    const mockMatch = await mockMatchRepo.getMatches();
+    const mockCrowd = await mockCrowdRepo.getCrowdAnalysis();
+    const mockIncident = await mockIncidentRepo.getIncidents();
+
+    assert.strictEqual(mockUser.role, UserRole.FAN);
+    assert.strictEqual(mockMatch[0].status, 'LIVE');
+    assert.strictEqual(mockCrowd[0].sectorId, 'SEC_104');
+    assert.strictEqual(mockIncident[0].category, 'MEDICAL_EMERGENCY');
+  });
+
+  // Test 12: Synapse Core End-to-End Integration Contract Verification
+  it('should verify Synapse Core pipeline resolves correct intent and options schema', async () => {
+    const aiProvider = new MockAIProvider(10, false, false);
+    const core = new SynapseCore(intentEngine, contextBuilder, decisionEngine, promptBuilder, aiProvider, responseParser);
+
+    const rec = await core.getRecommendation(
+      "FIRE EMERGENCY IN PROGRESS",
+      {
+        userId: "user-fan-1",
+        activeRole: UserRole.FAN,
+        location: { latitude: 25.3522, longitude: 51.5311, sectorId: "SEC_104" }
+      }
+    );
+
+    assert.strictEqual(rec.intent, 'EMERGENCY');
+    assert.ok(rec.recommendation);
+  });
 });

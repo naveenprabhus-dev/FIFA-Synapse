@@ -12,3 +12,4 @@ export * from './incident';
 export * from './navigation';
 export * from './parking';
 export * from './weather';
+export * from './accessibility';

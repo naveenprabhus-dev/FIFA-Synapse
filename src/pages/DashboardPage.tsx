@@ -22,6 +22,7 @@ import { SmartNavigationAgent } from '../features/fan/SmartNavigationAgent';
 import { CrowdIntelligenceAgent } from '../features/crowd/CrowdIntelligenceAgent';
 import { FoodServicesAgent } from '../features/fan/FoodServicesAgent';
 import { EmergencyResponseAgent } from '../features/emergency/EmergencyResponseAgent';
+import { AccessibilityIntelligenceAgent } from '../features/accessibility/AccessibilityIntelligenceAgent';
 import { 
   Activity, Award, Compass, Heart, Layers, MapPin, 
   MessageSquare, Shield, ShieldAlert, ShoppingBag, Terminal, Users 
@@ -262,6 +263,10 @@ export function DashboardPage() {
       ) : activeTab === 'navigation' ? (
         <div className="space-y-6 animate-fade-in">
           <SmartNavigationAgent />
+        </div>
+      ) : activeTab === 'accessibility' ? (
+        <div className="space-y-6 animate-fade-in">
+          <AccessibilityIntelligenceAgent />
         </div>
       ) : activeTab === 'crowd-management' || activeTab === 'crowd-monitoring' ? (
         <div className="space-y-6 animate-fade-in">
