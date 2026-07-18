@@ -21,6 +21,7 @@ import {
 import { SmartNavigationAgent } from '../features/fan/SmartNavigationAgent';
 import { CrowdIntelligenceAgent } from '../features/crowd/CrowdIntelligenceAgent';
 import { FoodServicesAgent } from '../features/fan/FoodServicesAgent';
+import { EmergencyResponseAgent } from '../features/emergency/EmergencyResponseAgent';
 import { 
   Activity, Award, Compass, Heart, Layers, MapPin, 
   MessageSquare, Shield, ShieldAlert, ShoppingBag, Terminal, Users 
@@ -269,6 +270,10 @@ export function DashboardPage() {
       ) : activeTab === 'food-services' || activeTab === 'inventory' ? (
         <div className="space-y-6 animate-fade-in">
           <FoodServicesAgent />
+        </div>
+      ) : activeTab === 'incident-center' || activeTab === 'active-incidents' || activeTab === 'emergency-center' ? (
+        <div className="space-y-6 animate-fade-in">
+          <EmergencyResponseAgent />
         </div>
       ) : (
         /* Tab Specific Views showing corresponding reusable mock cards */

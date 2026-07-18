@@ -115,31 +115,80 @@ Formulate a smart concession/replenishment recommendation matching this JSON sch
   }
 
   private buildEmergencyPrompt(context: SynapseFullContext, options?: Record<string, unknown>): CompiledPrompt {
-    const sysInstruction = `You are the Crisis Operations and Emergency Routing Director for FIFA Synapse.
-Your primary duty is user safety, route clearing, and immediate medical/security dispatch recommendations.
-Always return valid JSON.`;
+    const sysInstruction = `You are the Crisis Operations, Security, and Emergency Routing Director for FIFA Synapse.
+Your primary duty is user safety, threat isolation, route clearing, and immediate medical/security dispatch recommendations.
+You must always return a valid, parsable JSON object. Do not include any markdown backticks or formatting outside the JSON object.`;
 
     const incidentsStr = context.activeIncidents && context.activeIncidents.length > 0
       ? context.activeIncidents.map(i => `- [${i.severity}] ${i.category} at ${i.locationName}: ${i.description}`).join('\n')
       : 'No active safety incidents reported.';
 
-    const userPrompt = `Intent: Emergency Incident Routing
-Query: ${options?.query ?? 'Active Emergency Dispatch'}
+    const crowdStr = context.crowdAnalysis
+      ? context.crowdAnalysis.map(c => `Sector ${c.sectorId}: ${c.occupancyPercent}% occupancy, status ${c.status}`).join('; ')
+      : 'No crowd density details.';
 
-Incidents on Site:
+    const emergencyType = options?.emergencyType || 'General Emergency';
+    const locationSector = options?.locationSector || context.userLocation?.sectorId || 'Sector 104';
+    const nearestMedicalRoom = options?.nearestMedicalRoom || 'Sector 104 First Aid Clinic';
+    const nearestExit = options?.nearestExit || 'Gate 4 East Exit';
+    const crowdDensityPercent = options?.crowdDensityPercent || 78;
+    const blockedRoutes = Array.isArray(options?.blockedRoutes) ? options.blockedRoutes.join(', ') : 'None';
+    const accessibilityNeeds = options?.accessibilityNeeds || 'NONE';
+    const elevatorStatus = options?.elevatorStatus || 'OPERATIONAL';
+    const weatherCondition = options?.weatherCondition || context.weather?.temperatureCelsius + '°C ' + context.weather?.forecastBrief || 'Clear';
+    const matchState = options?.matchState || (context.activeMatch ? `${context.activeMatch.currentPhase} (min: ${context.activeMatch.currentMinute})` : 'Unknown');
+
+    const userPrompt = `Intent: Emergency Incident Routing and Crisis Intelligence Decision
+Evaluate the following emergency inputs under critical time-pressure:
+- Emergency Type: ${emergencyType}
+- Severity: ${options?.severity || 'HIGH'}
+- User Active Role: ${context.activeRole}
+- Current User Location / Sector: ${locationSector}
+- Nearest Medical Room: ${nearestMedicalRoom}
+- Nearest Exit: ${nearestExit}
+- Local Sector Crowd Density: ${crowdDensityPercent}%
+- Known Blocked Routes / Sectors: ${blockedRoutes}
+- Accessibility Requirements: ${accessibilityNeeds} (Critical: If WHEELCHAIR, recommend step-free ramps and state specifically if lifts are down. If BLIND, suggest clear audio-vibrational guidance routes)
+- Elevator Operational Status: ${elevatorStatus}
+- Weather Condition: ${weatherCondition}
+- Active Match State: ${matchState}
+
+Active incidents currently registered on stadium telemetry:
 ${incidentsStr}
 
-Formulate an emergency dispatch and safe egress plan in JSON:
+Active crowd density nodes:
+${crowdStr}
+
+Your response must be a single JSON object. Choose a route that avoids crowded nodes and blocked routes. Ensure role-specific instructions:
+- Fans: Direct to clear exits or safe assembly points. Include step-by-step navigation instructions.
+- Organizers: High-level tactical dispatch, broadcast parameters, and coordination guidelines.
+- Operations: Localized incident dispatch, safety rings, crowd flow locks.
+- Venue Staff: Stock/inventory safety, gate overrides, and zone support directives.
+
+Formulate an emergency dispatch, safe egress, and tactical crisis plan strictly adhering to this JSON schema:
 {
-  "title": "Crisis Tactical Intervention Title",
-  "recommendation": "Clear dispatch/evacuation instruction",
-  "reason": "Direct medical or security safety path justification",
+  "title": "Tactical Emergency Response Action Plan",
+  "emergencyType": "${emergencyType}",
+  "severity": "${options?.severity || 'HIGH'}",
+  "recommendation": "Primary evacuation or action instruction (e.g. Evacuate via ramp B)",
+  "reason": "Direct safety/operational explanation of why this path/action is chosen",
+  "safeRoute": "Step-by-step description of the recommended safe route (e.g. Sector 104 -> Ramp B -> Gate 4 East)",
+  "nearestAssistance": "Name/location of nearest active medical/security hub",
+  "estimatedTime": "Estimated route traversal or response dispatch time (e.g. 3 minutes)",
   "confidenceScore": 0.0 to 1.0,
-  "priority": "CRITICAL",
-  "suggestedAction": "Immediate broadcast action or staff deployment directive",
-  "estimatedBenefit": "Injury prevention or path clear time reduction",
-  "alternative": "Secondary safe assembly route",
-  "reasoningDetails": ["Emergency priority 1", "Safety clearance justification"]
+  "priority": "CRITICAL" | "HIGH" | "MEDIUM",
+  "alternativeRoutes": [
+    "Alternative evacuation path 1",
+    "Alternative evacuation path 2"
+  ],
+  "suggestedAction": "Immediate broadcast action, staff deployment, or exit override step",
+  "estimatedBenefit": "Safety/injury prevention benefit statement",
+  "alternative": "Primary contingency option",
+  "reasoningDetails": [
+    "Assess immediate threat level in active sector",
+    "Calculate obstruction/blockage bypass factors",
+    "Establish role-appropriate directive based on role capabilities"
+  ]
 }
 `;
     return { systemInstruction: sysInstruction, userPrompt };
