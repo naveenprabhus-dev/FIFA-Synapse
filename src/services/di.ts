@@ -68,6 +68,7 @@ import { RouteAgent } from '../ai/agents/RouteAgent';
 import { FoodAgent } from '../ai/agents/FoodAgent';
 import { EmergencyAgent } from '../ai/agents/EmergencyAgent';
 import { AccessibilityAgent } from '../ai/agents/AccessibilityAgent';
+import { OperationsAgent } from '../ai/agents/OperationsAgent';
 import { GeminiClient } from '../ai/orchestrator/GeminiClient';
 import { GeminiProvider } from '../ai/orchestrator/GeminiProvider';
 
@@ -104,4 +105,5 @@ export const routeAgent = new RouteAgent(synapseCore);
 export const foodAgent = new FoodAgent(synapseCore);
 export const emergencyAgent = new EmergencyAgent(synapseCore);
 export const accessibilityAgent = new AccessibilityAgent(synapseCore);
+export const operationsAgent = new OperationsAgent(synapseCore);
 

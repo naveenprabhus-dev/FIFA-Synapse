@@ -21,6 +21,7 @@ export type SynapseIntent =
   | 'ACCESSIBILITY'
   | 'PARKING'
   | 'MATCH_INFORMATION'
+  | 'OPERATIONS'
   | 'GENERAL_ASSISTANCE';
 
 export type SynapsePriority = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';

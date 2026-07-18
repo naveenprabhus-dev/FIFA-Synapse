@@ -23,6 +23,7 @@ import { CrowdIntelligenceAgent } from '../features/crowd/CrowdIntelligenceAgent
 import { FoodServicesAgent } from '../features/fan/FoodServicesAgent';
 import { EmergencyResponseAgent } from '../features/emergency/EmergencyResponseAgent';
 import { AccessibilityIntelligenceAgent } from '../features/accessibility/AccessibilityIntelligenceAgent';
+import { OperationsIntelligenceAgent } from '../features/operations/OperationsIntelligenceAgent';
 import { 
   Activity, Award, Compass, Heart, Layers, MapPin, 
   MessageSquare, Shield, ShieldAlert, ShoppingBag, Terminal, Users 
@@ -279,6 +280,10 @@ export function DashboardPage() {
       ) : activeTab === 'incident-center' || activeTab === 'active-incidents' || activeTab === 'emergency-center' ? (
         <div className="space-y-6 animate-fade-in">
           <EmergencyResponseAgent />
+        </div>
+      ) : activeTab === 'operations-overview' || activeTab === 'assigned-tasks' || activeTab === 'maintenance' ? (
+        <div className="space-y-6 animate-fade-in">
+          <OperationsIntelligenceAgent />
         </div>
       ) : (
         /* Tab Specific Views showing corresponding reusable mock cards */

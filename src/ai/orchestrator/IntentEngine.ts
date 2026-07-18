@@ -36,6 +36,10 @@ export class IntentEngine {
       intent: 'MATCH_INFORMATION',
       keywords: ['match', 'score', 'minute', 'who scored', 'goal', 'kickoff', 'time', 'game', 'france', 'morocco', 'timeline', 'whistle', 'half', 'card', 'foul'],
     },
+    {
+      intent: 'OPERATIONS',
+      keywords: ['operations', 'operator', 'deployment', 'stadium operations', 'volunteer', 'cleaning', 'restroom', 'lost & found', 'lost and found', 'maintenance', 'gate monitoring', 'queue monitoring', 'medical team', 'security deployment', 'dispatch volunteer', 'restroom capacity'],
+    },
   ];
 
   /**

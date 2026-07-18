@@ -13,3 +13,4 @@ export * from './navigation';
 export * from './parking';
 export * from './weather';
 export * from './accessibility';
+export * from './operations';
