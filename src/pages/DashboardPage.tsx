@@ -28,10 +28,14 @@ import {
   Activity, Award, Compass, Heart, Layers, MapPin, 
   MessageSquare, Shield, ShieldAlert, ShoppingBag, Terminal, Users 
 } from 'lucide-react';
+import { SmartAlertBanner } from '../components/notification/SmartAlertBanner';
+import { ProactiveNotificationCenter } from '../components/notification/ProactiveNotificationCenter';
+import { useProactiveNotifications } from '../contexts/ProactiveNotificationContext';
 
 export function DashboardPage() {
   const { user } = useAuth();
-  const { activeRole, activeTab, notifications } = useSynapse();
+  const { activeRole, activeTab, setActiveTab, notifications } = useSynapse();
+  const { proactiveNotifications, markAsRead } = useProactiveNotifications();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const handleRefresh = () => {
@@ -76,6 +80,16 @@ export function DashboardPage() {
 
   return (
     <div className="space-y-6">
+      {/* Smart Alert Banner for High/Critical Alerts */}
+      <SmartAlertBanner
+        notifications={proactiveNotifications}
+        onDismiss={markAsRead}
+        onView={(alert) => {
+          markAsRead(alert.id);
+          setActiveTab('proactive-center');
+        }}
+      />
+
       {/* Upper context breadcrumb & titles */}
       <DashboardHeader 
         role={activeRole} 
@@ -260,6 +274,10 @@ export function DashboardPage() {
               />
             </div>
           </div>
+        </div>
+      ) : activeTab === 'proactive-center' ? (
+        <div className="space-y-6 animate-fade-in">
+          <ProactiveNotificationCenter />
         </div>
       ) : activeTab === 'navigation' ? (
         <div className="space-y-6 animate-fade-in">

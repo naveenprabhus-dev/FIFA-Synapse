@@ -28,6 +28,9 @@ import {
   VenueService,
   RecommendationService,
   EmergencyService,
+  RecommendationAggregator,
+  DecisionService,
+  NotificationPriorityService,
 } from './index';
 
 // Instantiate mock repositories as default implementations
@@ -54,6 +57,9 @@ export const operationsService = new OperationsService(incidentRepository);
 export const venueService = new VenueService(venueRepository, foodCourtRepository, parkingRepository);
 export const recommendationService = new RecommendationService(recommendationRepository);
 export const emergencyService = new EmergencyService();
+export const recommendationAggregator = new RecommendationAggregator();
+export const decisionService = new DecisionService();
+export const notificationPriorityService = new NotificationPriorityService();
 
 // AI Orchestration Imports
 import { IntentEngine } from '../ai/orchestrator/IntentEngine';
@@ -106,4 +112,8 @@ export const foodAgent = new FoodAgent(synapseCore);
 export const emergencyAgent = new EmergencyAgent(synapseCore);
 export const accessibilityAgent = new AccessibilityAgent(synapseCore);
 export const operationsAgent = new OperationsAgent(synapseCore);
+
+import { ProactiveNotificationAgent } from '../ai/agents/ProactiveNotificationAgent';
+export const proactiveNotificationAgent = new ProactiveNotificationAgent(aiProvider);
+
 

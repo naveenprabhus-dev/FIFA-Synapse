@@ -15,3 +15,7 @@ export * from './RecommendationService';
 export * from './EmergencyService';
 export * from './AccessibilityService';
 export * from './OperationsIntelligenceService';
+export * from './RecommendationAggregator';
+export * from './DecisionService';
+export * from './NotificationPriorityService';
+

@@ -6,6 +6,7 @@
 import { ReactNode } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { SynapseProvider } from '../contexts/SynapseContext';
+import { ProactiveNotificationProvider } from '../contexts/ProactiveNotificationContext';
 import { AuthProvider } from '../features/auth/AuthContext';
 import { SettingsProvider } from '../contexts/SettingsContext';
 import { ErrorBoundary } from '../components/feedback/ErrorBoundary';
@@ -20,11 +21,14 @@ export function AppProviders({ children }: AppProvidersProps) {
       <SettingsProvider>
         <AuthProvider>
           <SynapseProvider>
-            <BrowserRouter>{children}</BrowserRouter>
+            <ProactiveNotificationProvider>
+              <BrowserRouter>{children}</BrowserRouter>
+            </ProactiveNotificationProvider>
           </SynapseProvider>
         </AuthProvider>
       </SettingsProvider>
     </ErrorBoundary>
   );
 }
+
 

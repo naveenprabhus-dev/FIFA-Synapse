@@ -14,3 +14,5 @@ export * from './parking';
 export * from './weather';
 export * from './accessibility';
 export * from './operations';
+export * from './proactiveNotification';
+

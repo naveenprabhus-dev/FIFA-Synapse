@@ -26,44 +26,44 @@ export function RoleLayout({ children }: RoleLayoutProps) {
       case UserRole.FAN:
         return [
           { id: 'home', name: 'Home', icon: Home },
+          { id: 'proactive-center', name: 'Proactive Center', icon: Radio },
           { id: 'navigation', name: 'Navigation', icon: Compass },
           { id: 'accessibility', name: 'Accessibility', icon: Accessibility },
           { id: 'matches', name: 'Matches', icon: Flame },
           { id: 'food-services', name: 'Food & Services', icon: ShoppingBag },
-          { id: 'notifications', name: 'Notifications', icon: Bell },
           { id: 'profile', name: 'Profile', icon: User },
           { id: 'settings', name: 'Settings', icon: Settings },
         ];
       case UserRole.ORGANIZER:
         return [
           { id: 'home', name: 'Home', icon: Home },
+          { id: 'proactive-center', name: 'Proactive Center', icon: Radio },
           { id: 'operations-overview', name: 'Operations Overview', icon: Activity },
           { id: 'crowd-management', name: 'Crowd Management', icon: Users },
           { id: 'accessibility', name: 'Accessibility', icon: Accessibility },
           { id: 'incident-center', name: 'Incident Center', icon: ShieldAlert },
           { id: 'analytics', name: 'Analytics', icon: BarChart3 },
-          { id: 'notifications', name: 'Notifications', icon: Bell },
           { id: 'settings', name: 'Settings', icon: Settings },
         ];
       case UserRole.OPERATIONS:
         return [
           { id: 'home', name: 'Home', icon: Home },
+          { id: 'proactive-center', name: 'Proactive Center', icon: Radio },
           { id: 'active-incidents', name: 'Active Incidents', icon: ShieldAlert },
           { id: 'assigned-tasks', name: 'Assigned Tasks', icon: ClipboardList },
           { id: 'accessibility', name: 'Accessibility', icon: Accessibility },
           { id: 'crowd-monitoring', name: 'Crowd Monitoring', icon: Users },
           { id: 'emergency-center', name: 'Emergency Center', icon: AlertTriangle },
-          { id: 'notifications', name: 'Notifications', icon: Bell },
           { id: 'settings', name: 'Settings', icon: Settings },
         ];
       case UserRole.STAFF:
         return [
           { id: 'home', name: 'Home', icon: Home },
+          { id: 'proactive-center', name: 'Proactive Center', icon: Radio },
           { id: 'maintenance', name: 'Maintenance', icon: Settings },
           { id: 'facility-status', name: 'Facility Status', icon: Map },
           { id: 'service-requests', name: 'Service Requests', icon: Heart },
           { id: 'inventory', name: 'Inventory', icon: Package },
-          { id: 'notifications', name: 'Notifications', icon: Bell },
           { id: 'settings', name: 'Settings', icon: Settings },
         ];
       default:
