@@ -24,6 +24,7 @@ import { FoodServicesAgent } from '../features/fan/FoodServicesAgent';
 import { EmergencyResponseAgent } from '../features/emergency/EmergencyResponseAgent';
 import { AccessibilityIntelligenceAgent } from '../features/accessibility/AccessibilityIntelligenceAgent';
 import { OperationsIntelligenceAgent } from '../features/operations/OperationsIntelligenceAgent';
+import CommandCenterDashboard from '../features/commandcenter/CommandCenterDashboard';
 import { 
   Activity, Award, Compass, Heart, Layers, MapPin, 
   MessageSquare, Shield, ShieldAlert, ShoppingBag, Terminal, Users 
@@ -274,6 +275,10 @@ export function DashboardPage() {
               />
             </div>
           </div>
+        </div>
+      ) : activeTab === 'command-center' ? (
+        <div className="space-y-6 animate-fade-in">
+          <CommandCenterDashboard />
         </div>
       ) : activeTab === 'proactive-center' ? (
         <div className="space-y-6 animate-fade-in">

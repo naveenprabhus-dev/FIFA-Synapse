@@ -31,6 +31,9 @@ import {
   RecommendationAggregator,
   DecisionService,
   NotificationPriorityService,
+  HealthScoreService,
+  InsightPrioritizationService,
+  DashboardSummaryService,
 } from './index';
 
 // Instantiate mock repositories as default implementations
@@ -60,6 +63,13 @@ export const emergencyService = new EmergencyService();
 export const recommendationAggregator = new RecommendationAggregator();
 export const decisionService = new DecisionService();
 export const notificationPriorityService = new NotificationPriorityService();
+export const healthScoreService = new HealthScoreService();
+export const insightPrioritizationService = new InsightPrioritizationService();
+export const dashboardSummaryService = new DashboardSummaryService(
+  healthScoreService,
+  recommendationAggregator,
+  insightPrioritizationService
+);
 
 // AI Orchestration Imports
 import { IntentEngine } from '../ai/orchestrator/IntentEngine';

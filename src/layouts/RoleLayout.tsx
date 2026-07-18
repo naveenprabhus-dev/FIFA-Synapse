@@ -10,7 +10,7 @@ import { Card } from '../components/ui/Card';
 import { Badge } from '../components/ui/Badge';
 import { 
   Home, Compass, Map, AlertTriangle, Radio, BarChart3, ClipboardList, Package, 
-  Zap, ShoppingBag, Bell, User, Settings, ShieldAlert, Heart, Activity, Flame, Users, Accessibility
+  Zap, ShoppingBag, Bell, User, Settings, ShieldAlert, Heart, Activity, Flame, Users, Accessibility, Terminal
 } from 'lucide-react';
 
 interface RoleLayoutProps {
@@ -37,6 +37,7 @@ export function RoleLayout({ children }: RoleLayoutProps) {
       case UserRole.ORGANIZER:
         return [
           { id: 'home', name: 'Home', icon: Home },
+          { id: 'command-center', name: 'AI Command Center', icon: Terminal },
           { id: 'proactive-center', name: 'Proactive Center', icon: Radio },
           { id: 'operations-overview', name: 'Operations Overview', icon: Activity },
           { id: 'crowd-management', name: 'Crowd Management', icon: Users },
@@ -48,6 +49,7 @@ export function RoleLayout({ children }: RoleLayoutProps) {
       case UserRole.OPERATIONS:
         return [
           { id: 'home', name: 'Home', icon: Home },
+          { id: 'command-center', name: 'AI Command Center', icon: Terminal },
           { id: 'proactive-center', name: 'Proactive Center', icon: Radio },
           { id: 'active-incidents', name: 'Active Incidents', icon: ShieldAlert },
           { id: 'assigned-tasks', name: 'Assigned Tasks', icon: ClipboardList },
