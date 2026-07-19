@@ -80,19 +80,19 @@ export function RoleLayout({ children }: RoleLayoutProps) {
     <div id="role-layout-root" className="flex flex-col lg:flex-row gap-6 w-full">
       {/* Dynamic Role Navigation Sidebar */}
       <aside className="w-full lg:w-64 flex-shrink-0">
-        <Card className="flex flex-col space-y-5 p-5 bg-slate-900/40 backdrop-blur-md border border-slate-800/80 rounded-2xl">
+        <Card className="flex flex-col space-y-5 p-5 bg-[#090e24]/70 backdrop-blur-xl border border-slate-900 rounded-2xl shadow-xl shadow-blue-950/20">
           <div>
-            <span className="text-[10px] text-slate-500 font-mono uppercase tracking-widest block mb-1">
+            <span className="text-[10px] text-blue-400 font-mono uppercase tracking-widest block mb-1 font-bold">
               Active Module
             </span>
             <h3 className="text-sm font-extrabold text-slate-200 tracking-tight flex items-center gap-1.5 font-sans uppercase">
-              <span>FIFA Command Cockpit</span>
+              <span className="bg-gradient-to-r from-slate-100 to-slate-300 bg-clip-text text-transparent">FIFA Command Cockpit</span>
             </h3>
           </div>
 
           {/* Quick role-switching interface for sandbox testing */}
-          <div className="border-t border-b border-slate-800/80 py-3.5 space-y-2">
-            <span className="text-[9px] text-slate-400 font-mono uppercase tracking-widest block">
+          <div className="border-t border-b border-slate-900/60 py-3.5 space-y-2.5">
+            <span className="text-[9px] text-slate-400 font-mono uppercase tracking-widest block font-bold">
               Sandbox Role Switch:
             </span>
             <div className="grid grid-cols-2 gap-1.5">
@@ -100,10 +100,10 @@ export function RoleLayout({ children }: RoleLayoutProps) {
                 <button
                   key={role}
                   onClick={() => switchRole(role)}
-                  className={`px-2 py-1.5 text-[9px] font-semibold font-mono rounded-lg border text-left transition-all duration-200 cursor-pointer ${
+                  className={`px-2 py-1.5 text-[9px] font-bold font-mono rounded-lg border text-left transition-all duration-200 cursor-pointer ${
                     activeRole === role
                       ? 'bg-blue-600 border-blue-500 text-white shadow-sm shadow-blue-600/20'
-                      : 'bg-slate-950/40 border-slate-900 text-slate-400 hover:text-slate-200 hover:bg-slate-950'
+                      : 'bg-[#060a1a]/60 border-slate-900 text-slate-400 hover:text-slate-200 hover:bg-[#0d1536]/80 hover:border-slate-800'
                   }`}
                   aria-label={`Switch context to ${role}`}
                 >
@@ -115,10 +115,10 @@ export function RoleLayout({ children }: RoleLayoutProps) {
 
           {/* Navigational controls */}
           <nav className="space-y-1" aria-label="Role Navigation Menu">
-            <span className="text-[9px] text-slate-500 font-mono uppercase tracking-widest block mb-2.5">
+            <span className="text-[9px] text-slate-500 font-mono uppercase tracking-widest block mb-2.5 font-bold">
               Role Navigation
             </span>
-            <div className="space-y-1 max-h-[300px] overflow-y-auto lg:max-h-none lg:overflow-visible">
+            <div className="space-y-1 max-h-[300px] overflow-y-auto lg:max-h-none lg:overflow-visible pr-1">
               {navItems.map((item) => {
                 const IconComponent = item.icon;
                 const isActive = activeTab === item.id;
@@ -126,14 +126,14 @@ export function RoleLayout({ children }: RoleLayoutProps) {
                   <button
                     key={item.id}
                     onClick={() => setActiveTab(item.id)}
-                    className={`w-full flex items-center space-x-2.5 px-3 py-2.5 rounded-xl text-left text-xs font-semibold transition-all cursor-pointer border ${
+                    className={`w-full flex items-center space-x-2.5 px-3 py-2.5 rounded-xl text-left text-xs font-semibold transition-all duration-200 cursor-pointer border ${
                       isActive
-                        ? 'bg-blue-500/10 border-blue-500/20 text-blue-300 shadow-sm shadow-blue-500/5'
-                        : 'bg-transparent border-transparent text-slate-400 hover:text-slate-200 hover:bg-slate-950/30'
+                        ? 'bg-gradient-to-r from-blue-600/15 to-blue-600/5 border-blue-500/25 text-blue-300 shadow-sm shadow-blue-500/5'
+                        : 'bg-transparent border-transparent text-slate-400 hover:text-slate-200 hover:bg-[#0d1536]/40'
                     }`}
                     aria-label={`Go to ${item.name}`}
                   >
-                    <IconComponent className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-blue-400' : 'text-slate-500'}`} />
+                    <IconComponent className={`w-4 h-4 flex-shrink-0 transition-transform ${isActive ? 'text-blue-400 scale-105' : 'text-slate-500'}`} />
                     <span className="font-sans text-[11px] font-medium tracking-wide">{item.name}</span>
                   </button>
                 );

@@ -162,33 +162,38 @@ export function LoginPage() {
   };
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center py-12 px-4 sm:px-6">
-      <div className="w-full max-w-md space-y-8">
-        <div className="text-center space-y-2">
-          <div className="mx-auto h-12 w-12 rounded-xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+    <div className="flex-1 flex flex-col items-center justify-center py-16 px-4 sm:px-6 relative">
+      {/* Decorative localized glowing blobs */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-blue-600/10 rounded-full blur-[80px] pointer-events-none" />
+      
+      <div className="w-full max-w-md space-y-8 relative z-10">
+        <div className="text-center space-y-3">
+          <div className="mx-auto h-14 w-14 rounded-2xl bg-gradient-to-tr from-blue-600 to-sky-500 flex items-center justify-center shadow-lg shadow-blue-500/20 border border-blue-400/25 group hover:scale-[1.03] transition-all duration-300">
             <Lock className="w-6 h-6 text-white" />
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-100 uppercase">
-            Access Control Gateway
-          </h2>
-          <p className="text-xs text-slate-400 font-sans">
-            Secure authentication nodes for FIFA Synapse Stadium Systems
-          </p>
+          <div className="space-y-1">
+            <h2 className="text-2xl font-black tracking-tight text-slate-100 uppercase bg-gradient-to-r from-slate-100 via-slate-100 to-slate-400 bg-clip-text text-transparent">
+              Access Control Gateway
+            </h2>
+            <p className="text-xs text-slate-400 font-mono tracking-wide uppercase">
+              Secure authentication node • FIFA Synapse
+            </p>
+          </div>
         </div>
 
         {error && (
-          <Alert variant="error" onClose={() => setError(null)}>
+          <Alert variant="error" onClose={() => setError(null)} className="shadow-lg shadow-rose-950/20 border border-rose-500/10">
             {error}
           </Alert>
         )}
 
         {infoMessage && (
-          <Alert variant="info" onClose={() => setInfoMessage(null)}>
+          <Alert variant="info" onClose={() => setInfoMessage(null)} className="shadow-lg shadow-blue-950/20 border border-blue-500/10">
             {infoMessage}
           </Alert>
         )}
 
-        <Card className="bg-slate-900/40 border-slate-800 p-6 shadow-xl space-y-6">
+        <Card className="bg-[#090e24]/75 backdrop-blur-xl border border-slate-900/80 p-8 shadow-2xl shadow-blue-950/10 space-y-6 rounded-2xl">
           {mode === 'LOGIN' && (
             <form onSubmit={handleManualSubmit} className="space-y-4">
               <Input
@@ -447,21 +452,21 @@ export function LoginPage() {
           )}
 
           {/* Quick Simulated Bypass Section (Sandbox Mode) */}
-          <div className="border-t border-slate-900 pt-6 space-y-3">
+          <div className="border-t border-slate-900 pt-6 space-y-3.5">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] text-slate-500 font-mono uppercase tracking-wider">
-                Quick Bypass Cockpit Modes
+              <span className="text-[10px] text-slate-400 font-mono uppercase tracking-widest font-bold">
+                Quick Bypass Sandbox Modes
               </span>
-              <Badge variant="warning" className="text-[8px] font-mono">
-                DEVELOPER
-              </Badge>
+              <span className="px-1.5 py-0.5 rounded-[4px] bg-amber-500/10 border border-amber-500/20 text-[8px] text-amber-400 font-mono font-bold uppercase tracking-wider scale-90">
+                DEVELOPER GATE
+              </span>
             </div>
             <div className="grid grid-cols-2 gap-2">
               {[
-                { role: UserRole.FAN, title: 'Fan', icon: User, style: 'hover:border-blue-500/30 hover:text-blue-400' },
-                { role: UserRole.ORGANIZER, title: 'Organizer', icon: Landmark, style: 'hover:border-indigo-500/30 hover:text-indigo-400' },
-                { role: UserRole.OPERATIONS, title: 'Operations', icon: Shield, style: 'hover:border-amber-500/30 hover:text-amber-400' },
-                { role: UserRole.STAFF, title: 'Venue Staff', icon: Users, style: 'hover:border-emerald-500/30 hover:text-emerald-400' },
+                { role: UserRole.FAN, title: 'Fan', icon: User, style: 'hover:border-blue-500/35 hover:text-blue-300 hover:bg-blue-600/5' },
+                { role: UserRole.ORGANIZER, title: 'Organizer', icon: Landmark, style: 'hover:border-indigo-500/35 hover:text-indigo-300 hover:bg-indigo-600/5' },
+                { role: UserRole.OPERATIONS, title: 'Operations', icon: Shield, style: 'hover:border-amber-500/35 hover:text-amber-300 hover:bg-amber-600/5' },
+                { role: UserRole.STAFF, title: 'Venue Staff', icon: Users, style: 'hover:border-emerald-500/35 hover:text-emerald-300 hover:bg-emerald-600/5' },
               ].map((b) => {
                 const Icon = b.icon;
                 return (
@@ -470,10 +475,10 @@ export function LoginPage() {
                     type="button"
                     onClick={() => handleQuickBypass(b.role)}
                     disabled={quickLoadingRole !== null || loading}
-                    className={`flex items-center space-x-2 p-2 rounded-lg border border-slate-900/80 bg-slate-950/40 text-left text-xs text-slate-400 transition-all cursor-pointer ${b.style}`}
+                    className={`flex items-center space-x-2.5 p-2.5 rounded-xl border border-slate-900 bg-[#060a1a]/80 text-left text-xs text-slate-400 transition-all duration-200 cursor-pointer ${b.style}`}
                   >
-                    <Icon className="w-3.5 h-3.5" />
-                    <span className="font-semibold truncate">{b.title}</span>
+                    <Icon className="w-4 h-4 text-slate-500 flex-shrink-0" />
+                    <span className="font-semibold truncate text-[11px] font-sans tracking-wide">{b.title}</span>
                   </button>
                 );
               })}

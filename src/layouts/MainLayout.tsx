@@ -39,27 +39,39 @@ export function MainLayout({ children }: { children: ReactNode }) {
   const currentPathName = location.pathname;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col relative overflow-x-hidden font-sans">
-      {/* Soft elegant architectural lighting blobs at corners (Premium sports app style) */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[150px] pointer-events-none" />
+    <div className="min-h-screen bg-[#070b19] text-slate-100 flex flex-col relative overflow-x-hidden font-sans selection:bg-blue-500/30 selection:text-blue-200">
+      {/* Premium Ambient Lighting Accents */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[350px] bg-gradient-to-b from-blue-500/10 via-blue-600/5 to-transparent rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[600px] h-[400px] bg-gradient-to-t from-emerald-500/5 via-teal-500/2 to-transparent rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-[300px] h-[300px] bg-indigo-500/5 rounded-full blur-[90px] pointer-events-none" />
+
+      {/* Decorative Top Accent Line */}
+      <div className="h-[2px] w-full bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-600 sticky top-0 z-50 shadow-lg shadow-blue-500/20" />
 
       {/* Main header bar */}
-      <header className="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-900/60 px-4 sm:px-6 py-3 flex items-center justify-between">
-        {/* Left branding */}
+      <header className="sticky top-[2px] z-40 bg-[#090e24]/80 backdrop-blur-xl border-b border-slate-900 px-4 sm:px-6 py-3 flex items-center justify-between">
+        {/* Left branding with futuristic FIFA design */}
         <div 
           onClick={() => navigate('/')} 
           className="flex items-center space-x-3 cursor-pointer group select-none"
         >
-          <div className="relative w-9 h-9 flex items-center justify-center bg-blue-600 rounded-lg overflow-hidden shadow-lg shadow-blue-600/20 group-hover:scale-105 transition-all">
-            <span className="text-white font-bold font-mono text-base tracking-tighter">S</span>
-            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent animate-pulse" />
+          <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-blue-600 to-sky-600 rounded-xl overflow-hidden shadow-md shadow-blue-600/20 group-hover:scale-[1.03] transition-all duration-300">
+            <span className="text-white font-extrabold font-mono text-lg tracking-tighter">S</span>
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            <div className="absolute inset-0.5 rounded-[10px] bg-gradient-to-br from-[#090e24] to-[#121a3e] flex items-center justify-center">
+              <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-sky-300 font-black font-mono text-base tracking-tighter">S</span>
+            </div>
           </div>
           <div>
-            <h1 className="text-sm sm:text-base font-extrabold tracking-tight text-slate-100 uppercase group-hover:text-blue-400 transition-colors">
-              FIFA Synapse
-            </h1>
-            <p className="text-[9px] text-slate-400 font-mono tracking-wider uppercase leading-none">
+            <div className="flex items-center gap-1.5">
+              <h1 className="text-sm sm:text-base font-extrabold tracking-tight text-slate-100 uppercase group-hover:text-blue-400 transition-colors">
+                FIFA Synapse
+              </h1>
+              <span className="px-1 py-0.5 rounded-[4px] bg-blue-500/10 border border-blue-500/20 text-[8px] text-blue-400 font-mono font-bold uppercase tracking-wider scale-90 origin-left">
+                v2.4
+              </span>
+            </div>
+            <p className="text-[9px] text-slate-400 font-mono tracking-wider uppercase leading-none mt-0.5">
               Smart Stadium Intelligence
             </p>
           </div>

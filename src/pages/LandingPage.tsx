@@ -126,7 +126,7 @@ export function LandingPage() {
   };
 
   return (
-    <div className="bg-slate-950 text-slate-100 min-h-screen relative flex flex-col justify-start overflow-x-hidden">
+    <div className="bg-[#070b19] text-slate-100 min-h-screen relative flex flex-col justify-start overflow-x-hidden">
       {/* Canvas Neural Background */}
       <NeuralBackground />
 
