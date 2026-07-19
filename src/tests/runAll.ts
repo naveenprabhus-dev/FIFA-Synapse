@@ -31,7 +31,8 @@ async function runTestFile(file: string): Promise<boolean> {
     console.log(`\n==================================================`);
     console.log(`RUNNING: ${file}`);
     console.log(`==================================================`);
-    const proc = spawn('npx', ['tsx', file], { stdio: 'inherit' });
+    // Run vitest specifically on this file to register correctly
+    const proc = spawn('npx', ['vitest', 'run', file], { stdio: 'inherit' });
     proc.on('close', (code) => {
       if (code === 0) {
         console.log(`\nSUCCESS: ${file} passed successfully.`);
