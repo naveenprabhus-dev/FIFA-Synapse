@@ -4,7 +4,6 @@
  */
 
 import { SynapseRecommendation } from '../types/synapse';
-import { RepositoryError } from '../utils/errors';
 
 export interface RecommendationRepository {
   getRecommendation(decisionType: string, context: unknown): Promise<SynapseRecommendation<string>>;
@@ -38,7 +37,7 @@ export class MockRecommendationRepository implements RecommendationRepository {
     }
   };
 
-  async getRecommendation(decisionType: string, context: unknown): Promise<SynapseRecommendation<string>> {
+  async getRecommendation(decisionType: string, _context: unknown): Promise<SynapseRecommendation<string>> {
     await new Promise((resolve) => setTimeout(resolve, 300));
     const rec = this.recommendations[decisionType];
     if (!rec) {

@@ -3,8 +3,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { RepositoryError } from '../utils/errors';
-
 export interface SystemSettings {
   language: 'EN' | 'ES' | 'FR' | 'AR';
   theme: 'DARK' | 'HIGH_CONTRAST';

@@ -7,7 +7,6 @@ import { SynapseFullContext } from '../ai/orchestrator/ContextBuilder';
 import { HealthScoreService, StadiumHealth } from './HealthScoreService';
 import { RecommendationAggregator, AgentInsight } from './RecommendationAggregator';
 import { InsightPrioritizationService, PrioritizedRecommendation, PredictedRisk } from './InsightPrioritizationService';
-import { AppError } from '../utils/errors';
 
 export interface CommandCenterSummary {
   health: StadiumHealth;

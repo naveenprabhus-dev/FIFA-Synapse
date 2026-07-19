@@ -213,7 +213,7 @@ export class InsightPrioritizationService {
     }
   }
 
-  private explainWhy(agentName: string, insight: AgentInsight): string {
+  private explainWhy(agentName: string, _insight: AgentInsight): string {
     switch (agentName) {
       case 'Emergency Response Agent':
         return 'Critical reports require active dispatcher resources and immediate bypass route creation.';

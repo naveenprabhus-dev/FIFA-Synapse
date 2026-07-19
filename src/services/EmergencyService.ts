@@ -68,7 +68,7 @@ export class EmergencyService {
   public recommendRoute(
     sectorId: string,
     blockedRoutes: string[] = [],
-    accessibilityNeeds: string = 'NONE'
+    _accessibilityNeeds: string = 'NONE'
   ): {
     routeSegments: string;
     alternativeRoutes: string[];

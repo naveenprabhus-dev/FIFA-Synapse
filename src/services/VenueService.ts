@@ -6,7 +6,7 @@
 import { VenueRepository } from '../repositories/VenueRepository';
 import { FoodCourtRepository } from '../repositories/FoodCourtRepository';
 import { ParkingRepository } from '../repositories/ParkingRepository';
-import { StadiumGate, BathroomTelemetry } from '../types/stadium';
+import { BathroomTelemetry } from '../types/stadium';
 import { FoodCourt } from '../types/concessions';
 import { ParkingZone } from '../types/parking';
 

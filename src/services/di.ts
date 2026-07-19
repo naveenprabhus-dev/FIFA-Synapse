@@ -76,7 +76,6 @@ import { IntentEngine } from '../ai/orchestrator/IntentEngine';
 import { ContextBuilder } from '../ai/orchestrator/ContextBuilder';
 import { DecisionEngine } from '../ai/orchestrator/DecisionEngine';
 import { PromptBuilder } from '../ai/orchestrator/PromptBuilder';
-import { MockAIProvider } from '../ai/orchestrator/AIProvider';
 import { ResponseParser } from '../ai/orchestrator/ResponseParser';
 import { SynapseCore } from '../ai/orchestrator/SynapseCore';
 import { CrowdAgent } from '../ai/agents/CrowdAgent';

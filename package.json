@@ -1,7 +1,27 @@
 {
-  "name": "react-example",
+  "name": "fifa-synapse",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "FIFA Synapse: Next-Generation AI-powered Decision Intelligence Platform for Smart Stadiums orchestrating real-time telemetry, crowd flows, concession logistics, accessibility assistance, and responsive safety dispatching.",
+  "homepage": "https://ai.studio/build",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/google/ai-studio-build.git"
+  },
+  "keywords": [
+    "fifa-synapse",
+    "decision-intelligence",
+    "sports-tech",
+    "smart-stadiums",
+    "artificial-intelligence",
+    "google-gemini",
+    "react-19",
+    "firebase",
+    "tailwind-css",
+    "accessibility",
+    "wcag-aa",
+    "real-time-telemetry"
+  ],
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
@@ -9,7 +29,8 @@
     "start": "node dist/server.cjs",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "tsx src/tests/runAll.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

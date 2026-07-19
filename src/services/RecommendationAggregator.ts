@@ -4,7 +4,6 @@
  */
 
 import { SynapseFullContext } from '../ai/orchestrator/ContextBuilder';
-import { UserRole } from '../types/user';
 
 export interface AgentInsight {
   agentName: string;

@@ -4,7 +4,6 @@
  */
 
 import { RouteOption, NavigationQuery } from '../types/navigation';
-import { RepositoryError } from '../utils/errors';
 
 export interface NavigationRepository {
   getRouteOptions(originNodeId: string, destinationNodeId: string): Promise<RouteOption[]>;

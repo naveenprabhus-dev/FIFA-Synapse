@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { SynapsePriority, SynapseIntent } from './synapse';
+import { SynapsePriority } from './synapse';
 
 export type AccessibilityProfile =
   | 'WHEELCHAIR'

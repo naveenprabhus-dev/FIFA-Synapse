@@ -3,9 +3,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ProactiveNotification, ProactiveNotificationType } from '../types/proactiveNotification';
+import { ProactiveNotification } from '../types/proactiveNotification';
 import { SynapseFullContext } from '../ai/orchestrator/ContextBuilder';
-import { ValidationError, AppError } from '../utils/errors';
+import { ValidationError } from '../utils/errors';
 
 export class DecisionService {
   private static CONFIDENCE_THRESHOLD = 0.70;

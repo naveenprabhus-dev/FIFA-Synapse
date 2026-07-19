@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ProactiveNotification, ProactiveNotificationPriority } from '../types/proactiveNotification';
+import { ProactiveNotification } from '../types/proactiveNotification';
 import { UserRole } from '../types/user';
 
 export class NotificationPriorityService {

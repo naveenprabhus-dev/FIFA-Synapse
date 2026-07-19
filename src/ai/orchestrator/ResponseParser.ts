@@ -23,8 +23,8 @@ export class ResponseParser {
       // 1. Sanitize text by stripping potential markdown code block wrappers
       let cleanedText = rawText.trim();
       
-      // Match ```json ... ``` or ``` ... ``` patterns
-      const markdownCodeBlockRegex = /^```(?:json)?\s*([\s\S]*?)\s*```$/i;
+      // Match ```json ... ``` or ``` ... ``` patterns anywhere in the text
+      const markdownCodeBlockRegex = /```(?:json)?\s*([\s\S]*?)\s*```/i;
       const match = cleanedText.match(markdownCodeBlockRegex);
       if (match) {
         cleanedText = match[1].trim();
