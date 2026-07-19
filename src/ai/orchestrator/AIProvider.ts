@@ -63,6 +63,21 @@ export class MockAIProvider implements AIProvider {
           'Maintains balanced revenue distribution across concessions.'
         ]
       };
+    } else if (cleanPrompt.includes('lost') || cleanPrompt.includes('child')) {
+      responseObj = {
+        title: 'Lost Child Protocol Activation',
+        recommendation: 'Report description to nearest Gate steward or stadium authority, ensuring surrounding zones remain safe and monitored.',
+        reason: 'Missing person protocol is activated to mobilize staff across the target sector.',
+        confidenceScore: 0.96,
+        priority: 'CRITICAL',
+        suggestedAction: 'Mobilize volunteer guards and broadcast description to stewards.',
+        estimatedBenefit: 'Enables rapid reunion through comprehensive perimeter controls.',
+        alternative: 'Guide search party back to Sector 108 Info Desk.',
+        reasoningDetails: [
+          'Lost child reports require instant mobilization of authorities.',
+          'Physical checks of gates are initiated.'
+        ]
+      };
     } else if (cleanPrompt.includes('emergency') || cleanPrompt.includes('blocked') || cleanPrompt.includes('medical')) {
       responseObj = {
         title: 'Emergency Safety Route Clearance',

@@ -75,17 +75,7 @@ const mockVenueRepo = {
   }),
 };
 
-function describe(name: string, fn: () => void) {
-  console.log(`[TEST SUITE] Starting: ${name}`);
-  fn();
-}
-
-function it(name: string, fn: () => Promise<void>) {
-  fn().then(
-    () => console.log(`  ✓ PASSED: ${name}`),
-    (err) => console.error(`  ✗ FAILED: ${name}\n`, err)
-  );
-}
+import { describe, it } from 'vitest';
 
 describe('SmartNavigationAgent Suite', () => {
   it('should successfully calculate custom navigation route parameters', async () => {

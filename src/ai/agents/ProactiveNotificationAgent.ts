@@ -105,7 +105,9 @@ Make sure to explain WHY the notification matters.`;
       }
 
       const parsed = JSON.parse(cleanedText);
-      const items = Array.isArray(parsed.notifications) ? parsed.notifications : [];
+      const items = Array.isArray(parsed.notifications) 
+        ? parsed.notifications 
+        : (parsed.title || parsed.recommendation ? [parsed] : []);
 
       return items.map((item: any, idx: number) => ({
         id: `notif-proactive-${Date.now()}-${idx}`,

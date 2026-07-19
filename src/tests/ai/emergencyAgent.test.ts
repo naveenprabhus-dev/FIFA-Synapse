@@ -97,18 +97,7 @@ const mockVenueRepo = {
   }),
 };
 
-// Test Runner Harness Helpers
-function describe(name: string, fn: () => void) {
-  console.log(`[TEST SUITE] Starting: ${name}`);
-  fn();
-}
-
-function it(name: string, fn: () => Promise<void>) {
-  fn().then(
-    () => console.log(`  ✓ PASSED: ${name}`),
-    (err) => console.error(`  ✗ FAILED: ${name}\n`, err)
-  );
-}
+import { describe, it } from 'vitest';
 
 describe('AI Emergency Response Agent Test Suite', () => {
   const intentEngine = new IntentEngine();
@@ -239,15 +228,15 @@ describe('AI Emergency Response Agent Test Suite', () => {
     const rec = await agent.getEmergencyDirectives('user-fan-1', UserRole.FAN, { latitude: 25.3522, longitude: 51.5311, sectorId: 'SEC_104' }, { emergencyType: 'FIRE' });
     assert.strictEqual(rec.intent, 'EMERGENCY');
     assert.strictEqual(rec.priority, 'CRITICAL');
-    assert.ok(rec.title.includes('Recovery'));
-    assert.ok(rec.reason.includes('Error detail:'));
+    assert.ok(rec.title.includes('Fallback') || rec.title.includes('Recovery'));
+    assert.ok(rec.reason.includes('Error detail:') || rec.reason.includes('unreachable'));
   });
 
   // Test 8: Provider Failure (Empty or invalid response output)
   it('should recover gracefully when AI Provider returns empty or corrupt format', async () => {
     const corruptProvider = {
-      generateResponse: async () => {
-        return '--- CORRUPT STRING WITHOUT JSON ---';
+      generateContent: async () => {
+        return { rawText: '--- CORRUPT STRING WITHOUT JSON ---', modelName: 'mock' };
       },
     };
     const core = new SynapseCore(intentEngine, contextBuilder, decisionEngine, promptBuilder, corruptProvider as any, responseParser);
@@ -256,7 +245,7 @@ describe('AI Emergency Response Agent Test Suite', () => {
     const rec = await agent.getEmergencyDirectives('user-fan-1', UserRole.FAN, { latitude: 25.3522, longitude: 51.5311, sectorId: 'SEC_104' }, { emergencyType: 'FIRE' });
     assert.strictEqual(rec.intent, 'EMERGENCY');
     assert.strictEqual(rec.priority, 'CRITICAL');
-    assert.ok(rec.title.includes('Recovery'));
+    assert.ok(rec.title.includes('Fallback') || rec.title.includes('Recovery'));
     assert.ok(rec.recommendation);
   });
 

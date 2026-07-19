@@ -7,26 +7,7 @@ import assert from 'node:assert';
 import { ContextBuilder } from '../../ai/orchestrator/ContextBuilder';
 import { UserRole } from '../../types/user';
 
-function describe(name: string, fn: () => void) {
-  console.log(`[TEST SUITE] Starting: ${name}`);
-  fn();
-}
-
-function it(name: string, fn: () => Promise<void> | void) {
-  try {
-    const res = fn();
-    if (res instanceof Promise) {
-      res.then(
-        () => console.log(`  ✓ PASSED: ${name}`),
-        (err) => console.error(`  ✗ FAILED: ${name}\n`, err)
-      );
-    } else {
-      console.log(`  ✓ PASSED: ${name}`);
-    }
-  } catch (err) {
-    console.error(`  ✗ FAILED: ${name}\n`, err);
-  }
-}
+import { describe, it } from 'vitest';
 
 describe('FIFA Synapse Performance & Stress Load Tests', () => {
   // 1. High-Density Telemetry updates

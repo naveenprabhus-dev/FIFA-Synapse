@@ -57,7 +57,7 @@ export class DecisionService {
     if (isDuplicate) {
       return {
         shouldPublish: false,
-        reason: `Suppressed: Similar notification of type '${proposed.type}' in zone '${proposed.affectedZone}' was already published recently to prevent notification fatigue.`
+        reason: `Suppressed: Similar notification of type '${proposed.type}' in zone '${proposed.affectedZone}' was already published recently within the 15-minute cooldown window to prevent notification fatigue.`
       };
     }
 

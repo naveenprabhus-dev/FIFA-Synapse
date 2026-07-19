@@ -90,18 +90,7 @@ const mockVenueRepo = {
   }),
 };
 
-// Custom minimal runner helpers
-function describe(name: string, fn: () => void) {
-  console.log(`[TEST SUITE] Starting: ${name}`);
-  fn();
-}
-
-function it(name: string, fn: () => Promise<void>) {
-  fn().then(
-    () => console.log(`  ✓ PASSED: ${name}`),
-    (err) => console.error(`  ✗ FAILED: ${name}\n`, err)
-  );
-}
+import { describe, it } from 'vitest';
 
 describe('AI Accessibility Intelligence Agent Test Suite', () => {
   const intentEngine = new IntentEngine();

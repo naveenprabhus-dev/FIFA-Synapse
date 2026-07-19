@@ -15,26 +15,7 @@ import { EmergencyResponseAgent } from '../../features/emergency/EmergencyRespon
 import { OperationsIntelligenceAgent } from '../../features/operations/OperationsIntelligenceAgent';
 import { UserRole } from '../../types/user';
 
-function describe(name: string, fn: () => void) {
-  console.log(`[TEST SUITE] Starting: ${name}`);
-  fn();
-}
-
-function it(name: string, fn: () => Promise<void> | void) {
-  try {
-    const res = fn();
-    if (res instanceof Promise) {
-      res.then(
-        () => console.log(`  ✓ PASSED: ${name}`),
-        (err) => console.error(`  ✗ FAILED: ${name}\n`, err)
-      );
-    } else {
-      console.log(`  ✓ PASSED: ${name}`);
-    }
-  } catch (err) {
-    console.error(`  ✗ FAILED: ${name}\n`, err);
-  }
-}
+import { describe, it } from 'vitest';
 
 describe('FIFA Synapse CommandCenter & Dashboard Components Tests', () => {
   const mockContext = {

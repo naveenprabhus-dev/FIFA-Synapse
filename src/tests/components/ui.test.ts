@@ -10,27 +10,7 @@ import { Badge } from '../../components/ui/Badge';
 import { Card } from '../../components/ui/Card';
 import { Input } from '../../components/ui/Input';
 
-// Custom runner helpers
-function describe(name: string, fn: () => void) {
-  console.log(`[TEST SUITE] Starting: ${name}`);
-  fn();
-}
-
-function it(name: string, fn: () => Promise<void> | void) {
-  try {
-    const res = fn();
-    if (res instanceof Promise) {
-      res.then(
-        () => console.log(`  ✓ PASSED: ${name}`),
-        (err) => console.error(`  ✗ FAILED: ${name}\n`, err)
-      );
-    } else {
-      console.log(`  ✓ PASSED: ${name}`);
-    }
-  } catch (err) {
-    console.error(`  ✗ FAILED: ${name}\n`, err);
-  }
-}
+import { describe, it } from 'vitest';
 
 describe('FIFA Synapse UI Primitives Component Tests', () => {
   // 1. Button component test

@@ -89,17 +89,7 @@ const mockVenueRepo = {
   }),
 };
 
-function describe(name: string, fn: () => void) {
-  console.log(`[TEST SUITE] Starting: ${name}`);
-  fn();
-}
-
-function it(name: string, fn: () => Promise<void>) {
-  fn().then(
-    () => console.log(`  ✓ PASSED: ${name}`),
-    (err) => console.error(`  ✗ FAILED: ${name}\n`, err)
-  );
-}
+import { describe, it } from 'vitest';
 
 describe('FoodRecommendationAgent Suite', () => {
   it('should successfully retrieve smart food suggestions incorporating user preferences', async () => {

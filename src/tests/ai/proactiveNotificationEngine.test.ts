@@ -264,15 +264,4 @@ describe('AI Proactive Notification Engine Test Suite', () => {
 
 });
 
-// Custom helper matching standard runner harness
-function describe(name: string, fn: () => void) {
-  console.log(`[TEST SUITE] Starting: ${name}`);
-  fn();
-}
-
-function it(name: string, fn: () => Promise<void>) {
-  fn().then(
-    () => console.log(`  ✓ PASSED: ${name}`),
-    (err) => console.error(`  ✗ FAILED: ${name}\n`, err)
-  );
-}
+import { describe, it } from 'vitest';

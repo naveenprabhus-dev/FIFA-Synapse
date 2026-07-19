@@ -13,27 +13,7 @@ import { PromptBuilder } from '../../ai/orchestrator/PromptBuilder';
 import { MockAIProvider } from '../../ai/orchestrator/AIProvider';
 import { ResponseParser } from '../../ai/orchestrator/ResponseParser';
 
-// Custom runner helpers
-function describe(name: string, fn: () => void) {
-  console.log(`[TEST SUITE] Starting: ${name}`);
-  fn();
-}
-
-function it(name: string, fn: () => Promise<void> | void) {
-  try {
-    const res = fn();
-    if (res instanceof Promise) {
-      res.then(
-        () => console.log(`  ✓ PASSED: ${name}`),
-        (err) => console.error(`  ✗ FAILED: ${name}\n`, err)
-      );
-    } else {
-      console.log(`  ✓ PASSED: ${name}`);
-    }
-  } catch (err) {
-    console.error(`  ✗ FAILED: ${name}\n`, err);
-  }
-}
+import { describe, it } from 'vitest';
 
 describe('FIFA Synapse Integration Flows Suite', () => {
   // Mock repository layers

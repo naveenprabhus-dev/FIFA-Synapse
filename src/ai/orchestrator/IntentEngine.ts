@@ -9,6 +9,10 @@ import { ValidationError } from '../../utils/errors';
 export class IntentEngine {
   private static KEYWORD_MAP: { intent: SynapseIntent; keywords: string[] }[] = [
     {
+      intent: 'OPERATIONS',
+      keywords: ['operations', 'operator', 'deployment', 'stadium operations', 'volunteer', 'cleaning', 'restroom', 'lost & found', 'lost and found', 'maintenance', 'gate monitoring', 'queue monitoring', 'medical team', 'security deployment', 'dispatch volunteer', 'restroom capacity', 'turnstiles', 'janitorial', 'divert'],
+    },
+    {
       intent: 'EMERGENCY',
       keywords: ['emergency', 'fire', 'smoke', 'panic', 'injury', 'medical', 'police', 'danger', 'hazard', 'evacuate', 'accident', 'hurt'],
     },
@@ -36,10 +40,6 @@ export class IntentEngine {
       intent: 'MATCH_INFORMATION',
       keywords: ['match', 'score', 'minute', 'who scored', 'goal', 'kickoff', 'time', 'game', 'france', 'morocco', 'timeline', 'whistle', 'half', 'card', 'foul'],
     },
-    {
-      intent: 'OPERATIONS',
-      keywords: ['operations', 'operator', 'deployment', 'stadium operations', 'volunteer', 'cleaning', 'restroom', 'lost & found', 'lost and found', 'maintenance', 'gate monitoring', 'queue monitoring', 'medical team', 'security deployment', 'dispatch volunteer', 'restroom capacity'],
-    },
   ];
 
   /**
@@ -52,6 +52,11 @@ export class IntentEngine {
     }
 
     const cleanQuery = query.toLowerCase();
+
+    // High priority overrides for navigation/routing queries with accessibility features
+    if (cleanQuery.includes('navigation path') || cleanQuery.includes('smart navigation')) {
+      return 'NAVIGATION';
+    }
 
     for (const mapping of IntentEngine.KEYWORD_MAP) {
       for (const word of mapping.keywords) {
